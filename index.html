@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sommelier de IA · por Cali</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f5;
+    --bg-alt: #f0ece4;
+    --ink: #2b241c;
+    --ink-soft: #5c5347;
+    --accent: #7a3b2e;
+    --accent-soft: #c98a63;
+    --line: #ded4c4;
+    --glow-1: rgba(201, 138, 99, 0.08);
+    --glow-2: rgba(201, 138, 99, 0.04);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── Ambient glow ── */
+  .ambient {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -1;
+    background:
+      radial-gradient(600px circle at 20% 15%, var(--glow-1) 0%, transparent 70%),
+      radial-gradient(500px circle at 80% 30%, var(--glow-2) 0%, transparent 70%),
+      radial-gradient(700px circle at 50% 85%, var(--glow-1) 0%, transparent 70%);
+    animation: ambient-shift 12s ease-in-out infinite alternate;
+  }
+  @keyframes ambient-shift {
+    0%   { transform: scale(1) rotate(0deg); opacity: 0.6; }
+    50%  { transform: scale(1.05) rotate(0.5deg); opacity: 1; }
+    100% { transform: scale(0.97) rotate(-0.3deg); opacity: 0.7; }
+  }
+
+  main { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; }
+  section { padding: 64px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  h1 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 2.1rem;
+    line-height: 1.25;
+    margin: 0 0 20px;
+    font-weight: 400;
+  }
+  h2 {
+    font-family: "DM Serif Display", Georgia, serif;
+    font-size: 1.5rem;
+    margin: 0 0 16px;
+    color: var(--accent);
+    font-weight: 400;
+    position: relative;
+    display: inline-block;
+  }
+  /* hand-drawn underline for h2 */
+  h2::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 100%;
+    height: 8px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M2,8 C20,3 40,12 60,7 C80,2 100,11 118,6' stroke='%23c98a63' stroke-width='2' fill='none' stroke-linecap='round' opacity='0.6'/%3E%3C/svg%3E") repeat-x;
+    background-size: 120px 12px;
+    opacity: 0.6;
+  }
+
+  h3 { font-size: 1.15rem; margin: 24px 0 8px; }
+  p { margin: 0 0 16px; }
+
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.75rem;
+    color: var(--accent-soft);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .lede { font-size: 1.1rem; color: var(--ink-soft); }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+  }
+  .btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.98rem;
+    cursor: pointer;
+    border: 2px solid var(--accent);
+    transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+  }
+  .btn-primary:hover {
+    background: #5e2d22;
+    border-color: #5e2d22;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(122, 59, 46, 0.2);
+  }
+  .btn-secondary {
+    background: transparent;
+    color: var(--accent);
+  }
+  .btn-secondary:hover {
+    background: var(--accent);
+    color: #fff;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(122, 59, 46, 0.15);
+  }
+
+  /* ── Hero section ── */
+  .hero { padding-top: 56px; position: relative; }
+
+  .hero-intro {
+    display: flex;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 24px;
+  }
+
+  .avatar-wrapper {
+    flex-shrink: 0;
+    position: relative;
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid var(--bg-alt);
+    box-shadow:
+      0 0 0 2px var(--accent-soft),
+      0 4px 12px rgba(122, 59, 46, 0.15);
+    animation: avatar-breathe 4s ease-in-out infinite;
+  }
+
+  @keyframes avatar-breathe {
+    0%, 100% { box-shadow: 0 0 0 2px var(--accent-soft), 0 4px 12px rgba(122, 59, 46, 0.15); }
+    50%      { box-shadow: 0 0 0 3px var(--accent-soft), 0 6px 20px rgba(122, 59, 46, 0.2); }
+  }
+
+  /* online indicator dot */
+  .online-dot {
+    position: absolute;
+    bottom: 3px;
+    right: 3px;
+    width: 14px;
+    height: 14px;
+    background: #48bb78;
+    border: 2px solid var(--bg);
+    border-radius: 50%;
+    animation: dot-pulse 2s ease-in-out infinite;
+  }
+  @keyframes dot-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50%      { transform: scale(1.2); opacity: 1; }
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    margin-bottom: 16px;
+    transition: box-shadow 0.2s ease;
+  }
+  .card:hover {
+    box-shadow: 0 4px 16px rgba(122, 59, 46, 0.08);
+  }
+  .card h3 { margin-top: 0; color: var(--accent); }
+
+  /* ── Steps ── */
+  .step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px;
+    border-radius: 10px;
+    transition: background 0.2s ease;
+  }
+  .step:hover {
+    background: var(--bg-alt);
+  }
+  .step-num {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+
+  /* ── Offer grid ── */
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  @media (min-width: 620px) {
+    .offer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  .offer-card {
+    border: 2px solid var(--line);
+    border-radius: 10px;
+    padding: 24px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .offer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(122, 59, 46, 0.1);
+  }
+  .offer-card.highlight {
+    border-color: var(--accent);
+    background: var(--bg-alt);
+  }
+  .price {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 8px 0;
+  }
+  .guarantee {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent-soft);
+    padding-left: 14px;
+    margin-top: 16px;
+  }
+
+  ul { padding-left: 20px; }
+  li { margin-bottom: 8px; }
+  a.inline-link { color: var(--accent); text-decoration-color: var(--accent-soft); text-underline-offset: 2px; transition: color 0.15s ease; }
+  a.inline-link:hover { color: #5e2d22; }
+
+  footer {
+    padding: 32px 0 64px;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    position: relative;
+  }
+
+  /* ── Subtle signature flourish ── */
+  .sig {
+    display: inline-block;
+    font-family: "DM Serif Display", Georgia, serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--accent-soft);
+    position: relative;
+  }
+  .sig::after {
+    content: '✧';
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    animation: sparkle 3s ease-in-out infinite;
+  }
+  @keyframes sparkle {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50%      { opacity: 0.8; transform: scale(1.3); }
+  }
+
+  /* ── Ambient grain overlay ── */
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.3;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+    background-repeat: repeat;
+    background-size: 256px 256px;
+  }
+
+  /* ── Scroll-triggered reveal (CSS-only, no JS) ── */
+  @media (prefers-reduced-motion: no-preference) {
+    section {
+      animation: section-in 0.8s ease-out both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 20%;
+    }
+    @keyframes section-in {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  }
+
+  /* ── Cursor highlight (tactile feel) ── */
+  ::selection {
+    background: var(--accent-soft);
+    color: #fff;
+  }
+
+  /* ── Decorative organic border mark ── */
+  .hand-drawn-box {
+    position: relative;
+    padding: 24px;
+    border-radius: 12px;
+    border: none;
+  }
+  .hand-drawn-box::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border: 2px solid var(--accent-soft);
+    border-radius: 14px;
+    opacity: 0.25;
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100'%3E%3Crect x='2' y='2' width='196' height='96' rx='12' stroke='black' stroke-width='2' fill='none' stroke-dasharray='4 3' stroke-linecap='round'/%3E%3C/svg%3E");
+    mask-size: 200px 100px;
+    mask-repeat: repeat;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<div class="ambient" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="eyebrow">Sommelier de IA · por Cali</div>
+
+    <div class="hero-intro">
+      <div class="avatar-wrapper">
+        <img src="profile.jpg" alt="Cali" class="avatar" width="80" height="80">
+        <span class="online-dot" aria-hidden="true"></span>
+      </div>
+      <div>
+        <h1>Sua empresa não precisa de mais uma ferramenta de IA.<br>Precisa de alguém que reconhece qual delas serve pra você.</h1>
+      </div>
+    </div>
+
+    <p class="lede">Eu sou o Cali. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed. Virou hábito as pessoas me procurarem com a mesma pergunta: "qual eu uso pra isso?" Transformei essa pergunta num serviço de 45 minutos.</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+      <a href="#" class="btn btn-secondary">Já sei que quero o Diagnóstico completo</a>
+    </div>
+  </section>
+
+  <!-- Problema -->
+  <section>
+    <h2>O que ainda toma seu tempo</h2>
+    <p>Toda semana chega uma ferramenta de IA nova no seu feed. Alguém no grupo de WhatsApp do seu setor jura que "mudou tudo". Você testa por dez minutos, esquece, volta pro jeito antigo.</p>
+    <p>Enquanto isso, o dia a dia continua manual: orçamento digitado um por um, a mesma pergunta de cliente respondida pela quinta vez no WhatsApp, planilha de estoque atualizada no fim do expediente, agendamento por mensagem de ida e volta.</p>
+    <p>Não é falta de vontade de usar IA. É que ninguém te disse qual ferramenta resolve qual dor — e em que ordem instalar as coisas na segunda-feira.</p>
+  </section>
+
+  <!-- Por que continua sem solução -->
+  <section>
+    <h2>Você provavelmente já tentou</h2>
+    <ul>
+      <li>Assistir um vídeo de "10 ferramentas de IA que todo empreendedor precisa conhecer" — e fechar a aba mais perdido do que antes.</li>
+      <li>Perguntar pro próprio ChatGPT "que ferramenta eu uso pro meu negócio" e receber uma lista de coisas que não sabe como adaptar pro seu negócio.</li>
+      <li>Contratar um freelancer pra montar um bot sob medida, que funcionou na demonstração e nunca foi usado. Ou não funcionou como o esperado.</li>
+      <li>Comprar um curso de IA genérico, assistir duas aulas, guardar o certificado.</li>
+    </ul>
+    <p>O problema não é falta de ferramenta. É a falta de alguém que entende sua rotina de trabalho antes de indicar qualquer coisa.</p>
+  </section>
+
+  <!-- Guia -->
+  <section>
+    <h2>Quem senta do outro lado da mesa</h2>
+    <p>Antes de virar "a pessoa que indica ferramenta de IA", passei anos em times de produto entendendo como decidir o que vale a pena construir — sentando com pessoas pra entender o problema antes de propor qualquer solução. Escrevi um e-book gratuito sobre como validar ideias em ciclos curtos, começando por entender o que o público realmente precisa antes de sair construindo: <a class="inline-link" href="#">Roteiro prático para validar ideias</a>. E outro sobre Jobs to be Done, o método que uso pra entender por que alguém escolhe uma ferramenta ou processo pra resolver um problema específico — a mesma lógica que aplico quando prescrevo ferramenta de IA: <a class="inline-link" href="#">Jobs to be Done em português</a>.</p>
+    <p>Desde o fim de 2022 acompanho e testo soluções de IA. Já apoiei times e líderes nesse assunto, e coordenei um time de automação com IA.</p>
+    <p>Hoje aplico esse mesmo olhar em ferramentas de IA: construí e mantenho publicamente o <a class="inline-link" href="#">stelow</a>, um conjunto de mais de 25 skills de workflow com agentes de IA. Acompanho de perto o que sai de novo, testo o que faz sentido testar no meu próprio uso — e principalmente aprendi a reconhecer padrões entre famílias de ferramentas, o que evita ter que testar tudo pra saber o que indicar. Também catalogo, há anos, os prompts que uso no dia a dia e em consultorias — reunidos publicamente <a class="inline-link" href="#">aqui</a>. Isso é o que separa uma recomendação séria de uma lista genérica de blog.</p>
+    <p>Sempre que der, indico o que você já pode usar dentro do que já paga, ou que se integra a isso — ou ferramentas prontas pra usar. Algo rápido e fácil pra começar. E, às vezes, algo que você instala no seu próprio servidor, sem custo extra de assinatura, quando você já tem alguém técnico que cuida disso.</p>
+  </section>
+
+  <!-- Como funciona -->
+  <section>
+    <h2>Como funciona</h2>
+    <div class="step">
+      <div class="step-num">1</div>
+      <div>
+        <h3>Conversa inicial (45 min)</h3>
+        <p>Sem powerpoint, sem demonstração de ferramenta. Faço uma entrevista rápida com perguntas como "me conta como foi seu dia de trabalho ontem, do primeiro clique ao último" e "qual a atividade mais difícil, demorada ou entediante no seu dia a dia ou da equipe?".</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div>
+        <h3>Análise e recomendação</h3>
+        <p>Cruzo o que você descreveu com o que testei e uso. Cada ferramenta prescrita responde a uma tarefa que você citou.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div>
+        <h3>Relatório</h3>
+        <p>Resumo do que eu ouvi, matriz de esforço x impacto, plano de 4 dias pra começar, e estimativa de horas por semana que isso libera.</p>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div>
+        <h3>Revisão</h3>
+        <p>Uma segunda conversa curta pra passar o relatório com você, tirar dúvida e ajustar o que não fez sentido.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Oferta -->
+  <section>
+    <h2>Escolha o seu ritmo</h2>
+    <div class="offer-grid">
+      <div class="offer-card">
+        <h3>Conversa gratuita</h3>
+        <p>20 minutos. Eu ouço sua rotina, aponto 1 ou 2 coisas que já dá pra mudar essa semana, sem custo.</p>
+        <div class="price">R$ 0</div>
+        <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
+      </div>
+      <div class="offer-card highlight">
+        <h3>Diagnóstico Sommelier</h3>
+        <p>Conversa guiada de 45 min + relatório completo + conversa de revisão do relatório.</p>
+        <div class="price">R$ 897</div>
+        <a href="#" class="btn btn-primary">Quero meu Diagnóstico Sommelier</a>
+        <div class="guarantee">Garantia: se o relatório não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Prova social -->
+  <section>
+    <h2>O que já existe em público</h2>
+    <ul>
+      <li><a class="inline-link" href="#">stelow</a> — mais de 25 skills de workflow com IA, código aberto, com estrelas e forks reais no GitHub.</li>
+      <li>Outros projetos open source ligados a desenvolvimento de sistemas com IA, no <a class="inline-link" href="#">GitHub</a>.</li>
+      <li>Uma coleção de prompts usados no dia a dia e em consultorias, catalogada <a class="inline-link" href="#">aqui</a>.</li>
+      <li>Dois e-books gratuitos sobre descoberta de produto e Jobs to be Done, no Substack.</li>
+      <li>Trabalho documentado em produto, cultura organizacional e facilitação em calionauta.com e LinkedIn.</li>
+    </ul>
+  </section>
+
+  <!-- CTA final -->
+  <section>
+    <h2>Ferramenta você já viu de sobra</h2>
+    <p>A pergunta que resta é qual delas serve pro seu negócio, na sua rotina, essa semana — não em teoria.</p>
+    <p style="font-size:1.2rem; font-weight:600;">Vamos conversar 20 minutos sobre o seu dia de trabalho?</p>
+    <div class="cta-row">
+      <a href="#" class="btn btn-primary">Quero minha conversa gratuita</a>
+      <a href="#" class="btn btn-secondary">Já quero o Diagnóstico completo</a>
+    </div>
+  </section>
+
+  <footer>
+    <span class="sig">Com cuidado, Cali</span><br>
+    Sommelier de IA · Florianópolis, SC
+  </footer>
+
+</main>
+
+</body>
+</html>

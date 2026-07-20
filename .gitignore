@@ -1,0 +1,5 @@
+# Workspace metadata (not part of the site)
+.pi/
+.agent_context/
+.multica/
+AGENTS.md
