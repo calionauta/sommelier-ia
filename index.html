@@ -692,24 +692,26 @@
     20% { background-position: -100% 0; }
   }
 
-  /* ── Primary button sparkle dots ── */
-  .btn-primary .sp {
+  /* ── Button sparkle dots ── */
+  .btn-sp {
     position: absolute;
-    width: 4px;
-    height: 4px;
+    width: 6px;
+    height: 6px;
     border-radius: 50%;
-    background: var(--gold);
     pointer-events: none;
     opacity: 0;
   }
-  .btn-primary .sp:nth-child(1) { top: -3px; left: 15%; animation: sp-pop 3s ease-in-out infinite; }
-  .btn-primary .sp:nth-child(2) { bottom: -3px; right: 25%; animation: sp-pop 3s ease-in-out infinite 0.8s; }
-  .btn-primary .sp:nth-child(3) { top: 40%; right: -3px; animation: sp-pop 3s ease-in-out infinite 1.6s; }
-  .btn-primary .sp:nth-child(4) { top: -3px; right: 40%; animation: sp-pop 3s ease-in-out infinite 2.4s; }
-  @keyframes sp-pop {
+  .btn-primary .btn-sp { background: #ffe9c0; box-shadow: 0 0 6px 2px rgba(255,233,192,0.4); }
+  .btn-secondary .btn-sp { background: var(--gold); box-shadow: 0 0 6px 2px rgba(212,167,106,0.5); }
+  .btn-sp:nth-child(1) { top: -5px; left: 12%; animation: btn-pop 4s ease-in-out infinite 0s; }
+  .btn-sp:nth-child(2) { bottom: -5px; right: 20%; animation: btn-pop 4s ease-in-out infinite 1s; }
+  .btn-sp:nth-child(3) { top: -5px; right: 35%; animation: btn-pop 4s ease-in-out infinite 2s; }
+  .btn-sp:nth-child(4) { bottom: -5px; left: 30%; animation: btn-pop 4s ease-in-out infinite 3s; }
+  @keyframes btn-pop {
     0%, 100% { opacity: 0; transform: scale(0) translate(0,0); }
-    12% { opacity: 1; transform: scale(1.3) translate(-1px,-2px); }
-    25% { opacity: 0; transform: scale(0.3) translate(-3px,-6px); }
+    15% { opacity: 1; transform: scale(1.3) translate(-1px,-2px); }
+    28% { opacity: 0.6; transform: scale(0.8) translate(-3px,-5px); }
+    40% { opacity: 0; transform: scale(0.2) translate(-5px,-10px); }
   }
 </style>
 </head>
@@ -739,8 +741,8 @@
         <h1>Seu trabalho não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
         <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
         <div class="cta-row">
-          <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min<span class="sp"></span><span class="sp"></span><span class="sp"></span><span class="sp"></span></a>
-          <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier</a>
+          <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+          <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
         </div>
       </div>
     </div>
@@ -878,7 +880,7 @@
           </ul>
           <p class="guarantee"><span class="icon">✦</span> Garantia: se a ficha de degustação não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
           <div class="offer-card-actions">
-          <a href="#" class="btn btn-primary">Contratar<span class="sp"></span><span class="sp"></span><span class="sp"></span><span class="sp"></span></a>
+          <a href="#" class="btn btn-primary">Contratar<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
           </div>
         </article>
         <article class="offer-card">
@@ -934,8 +936,8 @@
     <p>Não tem problema. A maioria das pessoas — dona de negócio, consultor ou líder de time — nunca parou pra mapear o que dá pra automatizar. A gente começa pela sua rotina: você me conta como é seu trabalho, e eu mapeio onde dá pra ganhar tempo.</p>
     <p>Se você já viu ferramentas mas não sabe qual aplicar no seu contexto, a mesma conversa serve — a diferença é que a gente parte do que você conhece e ajusta pra sua realidade.</p>
     <div class="cta-row">
-      <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min<span class="sp"></span><span class="sp"></span><span class="sp"></span><span class="sp"></span></a>
-      <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier</a>
+      <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+      <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
     </div>
   </section>
 
