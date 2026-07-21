@@ -671,32 +671,163 @@
     20% { background-position: -100% 0; }
   }
 
-  /* ── Sparkle burst ── */
+  /* ── CTA hover swap: when hovering one button, the other shifts ── */
+  .cta-row:has(.btn-secondary:hover) .btn-primary {
+    background: transparent;
+    color: var(--accent);
+    transform: translateY(-1px);
+    box-shadow: none;
+    border-color: var(--accent);
+  }
+  .cta-row:has(.btn-primary:hover) .btn-secondary {
+    background: transparent;
+    color: var(--ink-soft);
+    border-color: var(--line);
+    transform: translateY(-1px);
+    box-shadow: none;
+  }
+
+  /* ── Napkin Note (cartoon napkin com texto manuscrito) ── */
+  .napkin-note {
+    position: relative;
+    background: #f7f2ea;
+    font-family: 'Caveat', cursive;
+    color: #1b4c8a;
+    font-size: 17px;
+    line-height: 1.7;
+    padding: 28px 32px;
+    margin: 28px 0 10px;
+    border-radius: 6px;
+    transform: rotate(-0.6deg);
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.04),
+      0 8px 28px rgba(0,0,0,0.04),
+      inset 0 1px 0 rgba(255,255,255,0.7);
+    transition: transform 0.3s ease;
+    /* no filter here — applied only to the ::after texture layer */
+  }
+  .napkin-note:hover {
+    transform: rotate(-0.3deg) scale(1.01);
+  }
+
+  /* Paper grain texture layer (only on background, not on text) */
+  .napkin-note::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    background: #f7f2ea;
+    filter: url(#napkin-texture);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Corner fold (canto dobrado do napkin) */
+  .napkin-note::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-style: solid;
+    border-width: 0 20px 20px 0;
+    border-color: transparent #e8e0d4 #ddd5c5 transparent;
+    border-radius: 0 6px 0 0;
+    pointer-events: none;
+    z-index: 2;
+  }
+
+  /* Children sit above the texture layer */
+  .napkin-note > * {
+    position: relative;
+    z-index: 1;
+  }
+  .napkin-note p:last-child {
+    margin-bottom: 0;
+  }
+  .napkin-note p {
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+
+  /* Coffee ring stain (delightful detail) — beneath text */
+  .napkin-stain {
+    position: absolute;
+    bottom: 18px;
+    right: 40px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 48% 52%, transparent 34%, rgba(139, 119, 90, 0.12) 36%, rgba(139, 119, 90, 0.06) 42%, transparent 44%);
+    filter: blur(0.5px);
+    pointer-events: none;
+    opacity: 0.7;
+    transform: rotate(12deg);
+    z-index: 0;
+  }
+  .napkin-stain::before {
+    content: '';
+    position: absolute;
+    inset: 2px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 52% 48%, transparent 30%, rgba(139, 119, 90, 0.06) 32%, transparent 34%);
+  }
+
+  /* Ink smear detail — beneath text */
+  .napkin-ink {
+    position: absolute;
+    bottom: 60px;
+    left: 28px;
+    width: 16px;
+    height: 4px;
+    background: rgba(27, 76, 138, 0.06);
+    border-radius: 50%;
+    filter: blur(1px);
+    pointer-events: none;
+    transform: rotate(-8deg);
+    z-index: 0;
+  }
+
+  /* ── Sparkle ── */
   .sparkle-burst {
     position: absolute;
     pointer-events: none;
     font-family: "DM Serif Display", Georgia, serif;
     font-size: 18px;
     opacity: 0;
-    z-index: 2;
+    z-index: 5;
     animation: sparkle-pop 0.9s ease-out forwards;
+    will-change: transform, opacity;
   }
   .sparkle-burst.ambient { animation-duration: 1.3s; }
   .sparkle-burst.hover { animation-duration: 0.6s; }
-  .btn-primary .sparkle-burst { color: #ffe9c0; text-shadow: 0 0 10px rgba(255,233,192,0.9), 0 0 20px rgba(255,233,192,0.4); }
-  .btn-secondary .sparkle-burst { color: var(--gold); text-shadow: 0 0 10px rgba(212,167,106,0.9), 0 0 20px rgba(212,167,106,0.4); }
+  .btn-primary .sparkle-burst { color: var(--bg); text-shadow: 0 0 12px rgba(255,255,255,0.8), 0 0 24px rgba(255,255,255,0.3); }
+  .btn-secondary .sparkle-burst { color: var(--gold); text-shadow: 0 0 12px rgba(212,167,106,0.9), 0 0 24px rgba(212,167,106,0.4); }
   @keyframes sparkle-pop {
     0%   { opacity: 0; transform: scale(0) rotate(0deg) translateY(0); }
-    25%  { opacity: 1; transform: scale(1.3) rotate(40deg) translateY(-2px); }
-    55%  { opacity: 0.8; transform: scale(0.8) rotate(-10deg) translateY(-6px); }
-    100% { opacity: 0; transform: scale(0.3) rotate(25deg) translateY(-14px); }
+    20%  { opacity: 1; transform: scale(1.4) rotate(30deg) translateY(-3px); }
+    50%  { opacity: 0.85; transform: scale(0.9) rotate(-8deg) translateY(-8px); }
+    100% { opacity: 0; transform: scale(0.3) rotate(20deg) translateY(-18px); }
   }
 </style>
+
 </head>
 <body>
 
 <div class="ambient" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
+
+<!-- SVG filters for napkin organic effects -->
+<svg style="position:absolute;width:0;height:0;overflow:hidden;" aria-hidden="true">
+  <filter id="napkin-texture" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.6" numOctaves="4" result="noise" />
+    <feColorMatrix type="matrix" values="
+      0 0 0 0 0.97
+      0 0 0 0 0.95
+      0 0 0 0 0.92
+      0 0 0 0.06 0" in="noise" result="coloredNoise" />
+    <feBlend mode="multiply" in="SourceGraphic" in2="coloredNoise" />
+  </filter>
+</svg>
 
 <main>
 
@@ -721,6 +852,8 @@
     <div class="napkin-note">
       <p>Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
       <p>Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
+      <div class="napkin-stain" aria-hidden="true"></div>
+      <div class="napkin-ink" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -945,38 +1078,33 @@ document.querySelectorAll('.with-sparkle').forEach(btn => {
   let tick;
   function addSparkle(mode) {
     const sp = document.createElement('span');
-    sp.className = 'sparkle-burst';
+    sp.className = 'sparkle-burst' + (mode === 'hover' ? ' hover' : ' ambient');
     sp.textContent = '✦';
-    const side = Math.floor(Math.random() * 4);
-    const pos = Math.random() * 76 + 12;
-    const size = mode === 'ambient' ? (Math.random() * 6 + 16) : (Math.random() * 10 + 18);
+    const size = (mode === 'ambient' ? 12 : 16) + Math.random() * 8;
     sp.style.cssText = `
       position:absolute; pointer-events:none;
-      font-size:${Math.min(size, 28)}px;
-      ${side === 0 ? `top:-14px;left:${pos}%` : ''}
-      ${side === 1 ? `right:-14px;top:${pos}%` : ''}
-      ${side === 2 ? `bottom:-14px;left:${pos}%` : ''}
-      ${side === 3 ? `left:-14px;top:${pos}%` : ''}
-      color:${btn.classList.contains('btn-primary') ? '#ffe9c0' : '#d4a76a'};
-      text-shadow:0 0 12px ${btn.classList.contains('btn-primary') ? 'rgba(255,233,192,0.9)' : 'rgba(212,167,106,0.9)'}, 0 0 24px ${btn.classList.contains('btn-primary') ? 'rgba(255,233,192,0.3)' : 'rgba(212,167,106,0.3)'};
+      font-size:${Math.min(size, 26)}px;
+      top:${10 + Math.random() * 60}%;
+      left:${5 + Math.random() * 70}%;
       opacity:1;
     `;
     btn.appendChild(sp);
     sp.offsetHeight; // force reflow
-    sp.style.animation = `sparkle-pop ${mode === 'ambient' ? 1.3 : 0.6}s ease-out forwards`;
-    setTimeout(() => sp.remove(), 2000);
+    const dur = mode === 'ambient' ? 1.3 : 0.6;
+    sp.style.animation = `sparkle-pop ${dur}s ease-out forwards`;
+    setTimeout(() => { if (sp.parentNode) sp.remove(); }, dur * 1000 + 100);
   }
-  tick = setInterval(() => addSparkle('ambient'), 1000);
+  tick = setInterval(() => addSparkle('ambient'), 1200);
   btn.addEventListener('mouseenter', () => {
     clearInterval(tick);
-    for (let i = 0; i < 8; i++) setTimeout(() => addSparkle('hover'), i * 50);
-    tick = setInterval(() => addSparkle('hover'), 100);
+    for (let i = 0; i < 6; i++) setTimeout(() => addSparkle('hover'), i * 60);
+    tick = setInterval(() => addSparkle('hover'), 120);
   });
   btn.addEventListener('mouseleave', () => {
     clearInterval(tick);
-    setTimeout(() => { tick = setInterval(() => addSparkle('ambient'), 1000); }, 500);
+    setTimeout(() => { tick = setInterval(() => addSparkle('ambient'), 1200); }, 400);
   });
 });
-
+</script>
 </body>
 </html>
