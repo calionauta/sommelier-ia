@@ -239,8 +239,61 @@
     grid-template-columns: 1fr;
     gap: 20px;
   }
-  @media (min-width: 620px) {
+  @media (min-width: 720px) {
     .offer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (min-width: 1000px) {
+    .offer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  }
+  .context-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  @media (min-width: 620px) {
+    .context-bullets { grid-template-columns: 1fr 1fr; }
+  }
+  .context-bullets li {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.45;
+  }
+  .stage-list {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+  @media (min-width: 720px) {
+    .stage-list { grid-template-columns: repeat(3, 1fr); }
+  }
+  .stage-list li {
+    background: var(--bg-alt);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 0;
+  }
+  .stage-list li strong {
+    display: block;
+    color: var(--accent);
+    font-size: 1.02rem;
+    margin-bottom: 6px;
+  }
+  .stage-list li span {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+    line-height: 1.45;
   }
   .offer-card {
     border: 2px solid var(--line);
@@ -393,8 +446,8 @@
         <img src="profile.jpg" alt="Cali" class="avatar" width="72" height="72">
       </div>
       <div>
-        <h1>Sua empresa não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
-        <p class="hero-sub">Precisa de alguém que reconhece qual delas serve pra você e como usá-la na prática.</p>
+        <h1>Seu trabalho não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
+        <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
       </div>
     </div>
 
@@ -404,14 +457,32 @@
       <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
       <a href="#provar" class="btn btn-secondary">Quero Diagnóstico Sommelier</a>
     </div>
+    <p class="hero-sub">Para quem toca um negócio por conta própria, atua como consultor ou profissional liberal, ou lidera times de tecnologia, produto e projetos.</p>
   </section>
 
   <!-- Problema -->
   <section>
     <h2>O que ainda toma seu tempo</h2>
-    <p>Toda semana chega uma ferramenta de IA nova no seu feed. Alguém no grupo de WhatsApp do seu setor jura que "mudou tudo". Você testa por dez minutos, esquece, volta pro jeito antigo.</p>
-    <p>Enquanto isso, o dia a dia continua manual: orçamento digitado um por um, a mesma pergunta de cliente respondida pela quinta vez no WhatsApp, planilha de estoque atualizada no fim do expediente, agendamento por mensagem de ida e volta.</p>
-    <p>Não é falta de vontade de usar IA. É que ninguém te disse qual ferramenta resolve qual dor — e em que ordem instalar as coisas na segunda-feira.</p>
+    <p>Toda semana chega uma ferramenta de IA nova no seu feed. Alguém no grupo do seu setor jura que "mudou tudo". Você testa por dez minutos, esquece, volta pro jeito antigo.</p>
+    <p>O que continua manual depende de onde você atua — quatro situações que aparecem com frequência:</p>
+    <ul class="context-bullets">
+      <li><strong>Pequeno negócio.</strong> Orçamento, estoque, agenda e a mesma pergunta de cliente respondida pela quinta vez no WhatsApp.</li>
+      <li><strong>Consultor ou profissional liberal.</strong> Proposta sob medida, pesquisa de cliente, registros, conteúdo e follow-up tomando horas que faltam.</li>
+      <li><strong>Liderança de tecnologia.</strong> Priorização dispersa, piloto que morre, cobrança de resultado sem dado e pressão de custo.</li>
+      <li><strong>Time de produto ou projeto.</strong> Discovery, documentação, status, handoffs e tomada de decisão que ainda dependem de sincronia manual.</li>
+    </ul>
+    <p>Não é falta de vontade de usar IA. É que ninguém te disse qual ferramenta resolve qual dor — e em que ordem testar pra começo de conversa.</p>
+  </section>
+
+  <!-- Estágio -->
+  <section>
+    <h2>Em que momento você está?</h2>
+    <p>O ponto de partida muda o tipo de conversa — não o método. Três situações comuns:</p>
+    <ul class="stage-list">
+      <li><strong>Estou começando do zero</strong><span>Quero enxergar por onde a IA ou automação podem me ajudar, sem promessas vagas.</span></li>
+      <li><strong>Já tentei, mas não virou rotina</strong><span>Testei ferramentas, não consegui encaixar, e o time (ou eu) segue no modo manual.</span></li>
+      <li><strong>Quero aplicar IA no time com critério</strong><span>Preciso priorizar, ganhar aderência das pessoas e rodar experimentos com governança.</span></li>
+    </ul>
   </section>
 
   <!-- Por que continua sem solução -->
@@ -432,6 +503,7 @@
     <p>Antes de indicar qualquer ferramenta, passei anos sentado com times de produto pra entender o problema antes da solução — e registrei esse método em dois e-books gratuitos sobre validação de ideias e Jobs to be Done.</p>
     <p>Essa vivência em produto se estende a cultura, processos e estratégia: já atuei com consultoria, mentoria e estratégia nessas frentes. É por isso que o Diagnóstico Sommelier não para em ferramentas — quando a chave está em como as pessoas se organizam e decidem, eu indico caminhos, não só mais software.</p>
     <p>Desde o fim de 2022 acompanho e testo de verdade soluções de IA, apoiando times e líderes. E, na indicação, sempre que possível parto do que você já paga ou que se integra a isso: algo rápido pra começar, e às vezes algo pra instalar no seu servidor, sem assinatura a mais. Quem quiser o quadro completo, está no fim da página.</p>
+    <p>Esse mesmo jeito de trabalhar já apoia pessoas sozinhas, profissionais independentes e times. O que muda entre um caso e outro é só a profundidade do diagnóstico e o plano combinado com você.</p>
   </section>
 
   <!-- Como funciona -->
@@ -475,6 +547,17 @@
     <p>É o que separa um diagnóstico que entrega só uma lista de ferramentas de um que soma quem já sentou com times tratando de cultura e processo. Os exemplos práticos e as perguntas-guia ficam no relatório — pra conversa não estragar a surpresa antes da hora.</p>
   </section>
 
+  <!-- O que entra no diagnóstico -->
+  <section>
+    <h2>O que entra no diagnóstico</h2>
+    <p>Para você saber o tamanho real do que está contratando — e qual profundidade combina com seu caso:</p>
+    <ul class="context-bullets">
+      <li><strong>Diagnóstico Essencial.</strong> Uma pessoa responsável, uma conversa de 45 min, mapeamento da rotina, matriz de esforço × impacto, plano de 4 dias, estimativa de horas que isso libera e bônus de experimentos seguros para falhar.</li>
+      <li><strong>Diagnóstico de Time.</strong> 2 a 3 entrevistas + sessão conjunta de 60 min com o time, mapa de fluxos coletivos, critérios de risco/privacidade/integração, backlog priorizado de experimentos, plano de adoção em 30/60/90 e revisão com a liderança.</li>
+      <li><strong>Conversa gratuita.</strong> 20 min, sem custo, pra entender se faz sentido seguir e qual das duas profundidades combina com você.</li>
+    </ul>
+  </section>
+
   <!-- Oferta -->
   <section id="provar">
     <h2>O que deseja provar?</h2>
@@ -486,11 +569,18 @@
         <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
       </div>
       <div class="offer-card highlight">
-        <h3>Diagnóstico Sommelier</h3>
+        <h3>Diagnóstico Sommelier (Essencial)</h3>
         <p>Conversa guiada de 45 min + relatório completo (com bônus de experimentos seguros para falhar em cultura e processos) + conversa de revisão do relatório.</p>
         <div class="price">R$ 897</div>
-        <a href="#" class="btn btn-primary">Quero meu Diagnóstico Sommelier</a>
+        <a href="#" class="btn btn-primary">Quero meu Diagnóstico Essencial</a>
         <div class="guarantee">🛡️ Garantia: se o relatório não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</div>
+      </div>
+      <div class="offer-card">
+        <h3>Diagnóstico de Time</h3>
+        <p>Para times e lideranças. 2–3 entrevistas + sessão conjunta de 60 min + relatório priorizado com critérios de risco, integração e privacidade + plano de adoção em 30/60/90 + revisão.</p>
+        <div class="price">A combinar</div>
+        <a href="#" class="btn btn-secondary">Quero conversar sobre o de Time</a>
+        <div class="guarantee">Piloto sob convite: combinado caso a caso, com a mesma garantia de devolução.</div>
       </div>
     </div>
   </section>
@@ -498,6 +588,7 @@
   <!-- Prova social -->
   <section>
     <h2>O que já publiquei</h2>
+    <p>O método por trás do diagnóstico também aparece em: dois e-books gratuitos, stelow (25+ skills open source) e trabalho documentado no LinkedIn.</p>
     <ul>
       <li><a class="inline-link" href="#">stelow</a> — mais de 25 skills de workflow com IA, código aberto, com estrelas e forks reais no GitHub.</li>
       <li>Outros projetos open source ligados a desenvolvimento de sistemas com IA, no <a class="inline-link" href="#">GitHub</a>.</li>
@@ -522,12 +613,12 @@
 
   <!-- CTA final -->
   <section>
-    <h2>Ainda não sabe o que a IA pode fazer pelo seu negócio?</h2>
-    <p>Não tem problema. A maioria dos donos de negócio nunca parou pra pensar no que dá pra automatizar. A gente começa pelo seu dia a dia — você me conta como é seu trabalho, e eu mapeio onde dá pra ganhar tempo.</p>
+    <h2>Ainda não sabe onde a IA pode fazer diferença no seu trabalho?</h2>
+    <p>Não tem problema. A maioria das pessoas — dona de negócio, consultor ou líder de time — nunca parou pra mapear o que dá pra automatizar. A gente começa pela sua rotina: você me conta como é seu trabalho, e eu mapeio onde dá pra ganhar tempo.</p>
     <p>Se você já viu ferramentas mas não sabe qual aplicar no seu contexto, a mesma conversa serve — a diferença é que a gente parte do que você conhece e ajusta pra sua realidade.</p>
     <div class="cta-row">
       <a href="#" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-      <a href="#" class="btn btn-secondary">Quero Diagnóstico Sommelier</a>
+      <a href="#provar" class="btn btn-secondary">Ver opções de diagnóstico</a>
     </div>
   </section>
 
