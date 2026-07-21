@@ -708,16 +708,25 @@
     box-shadow: none;
   }
 
+  /* ── Napkin wrapper (flex container for tape + note) ── */
+  .napkin-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 28px 0 10px;
+  }
+
   /* ── Napkin Note (cartoon napkin com texto manuscrito) ── */
   .napkin-note {
     position: relative;
+    width: 100%;
     background: #f7f2ea;
     font-family: 'Patrick Hand', 'Caveat', cursive;
     color: #1b4c8a;
     font-size: 22px;
     line-height: 1.55;
     padding: 30px 34px;
-    margin: 28px 0 10px;
+    margin: 0;
     transform: rotate(-0.6deg);
     box-shadow:
       0 2px 8px rgba(0,0,0,0.04),
@@ -744,12 +753,12 @@
     transform: rotate(-0.3deg) scale(1.01);
   }
 
-  /* Sticky tape — adesivo segurando o napkin na parede */
+  /* Sticky tape — adesivo segurando o napkin na parede (metade no papel, metade no fundo) */
   .napkin-tape {
     position: relative;
     width: 64px;
     height: 28px;
-    margin: -20px auto 0;
+    margin: 0 auto -14px;
     transform: rotate(1.5deg);
     background: rgba(240, 230, 200, 0.6);
     border-radius: 2px;
@@ -859,6 +868,7 @@
     border-color: var(--accent) !important;
     box-shadow: none !important;
     transform: none !important;
+    --sparkle-color: var(--gold) !important;
   }
   .offer-grid .btn:hover {
     background: var(--accent) !important;
@@ -866,8 +876,9 @@
     border-color: var(--accent) !important;
     transform: translateY(-2px) !important;
     box-shadow: 0 6px 20px rgba(122, 59, 46, 0.15) !important;
+    --sparkle-color: var(--bg) !important;
   }
-  /* highlight card buttons keep bordeaux on self-hover */
+  /* highlight card: when in swapped state, bordaux text on transparent bg */
   .offer-card.highlight .btn-primary {
     background: var(--bordeaux);
     border-color: var(--bordeaux);
@@ -876,10 +887,12 @@
     background: transparent !important;
     color: var(--bordeaux) !important;
     border-color: var(--bordeaux) !important;
+    --sparkle-color: var(--gold) !important;
   }
   .offer-grid .offer-card.highlight .btn-primary:hover {
     background: var(--bordeaux) !important;
     color: #fff !important;
+    --sparkle-color: var(--bg) !important;
   }
 
   /* ── Sparkle ── */
@@ -900,8 +913,8 @@
     font-size: 11px;
   }
   .sparkle-burst.hover { animation-duration: 0.6s; }
-  .btn-primary .sparkle-burst { color: var(--bg); text-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 16px rgba(255,255,255,0.2); }
-  .btn-secondary .sparkle-burst { color: var(--gold); text-shadow: 0 0 8px rgba(212,167,106,0.6), 0 0 16px rgba(212,167,106,0.2); }
+  .btn-primary .sparkle-burst { color: var(--sparkle-color, var(--bg)); text-shadow: 0 0 8px rgba(255,255,255,0.6), 0 0 16px rgba(255,255,255,0.2); }
+  .btn-secondary .sparkle-burst { color: var(--sparkle-color, var(--gold)); text-shadow: 0 0 8px rgba(212,167,106,0.6), 0 0 16px rgba(212,167,106,0.2); }
   @keyframes sparkle-pop {
     0%   { opacity: 0; transform: scale(0) rotate(0deg) translateY(0); }
     20%  { opacity: 1; transform: scale(1.2) rotate(25deg) translateY(-2px); }
@@ -953,13 +966,15 @@
       </div>
     </div>
 
-    <div class="napkin-note">
-      <p>Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
-      <p>Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
-      <div class="napkin-stain" aria-hidden="true"></div>
-      <div class="napkin-ink" aria-hidden="true"></div>
+    <div class="napkin-wrap">
+      <div class="napkin-tape" aria-hidden="true"></div>
+      <div class="napkin-note">
+        <p>Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
+        <p>Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
+        <div class="napkin-stain" aria-hidden="true"></div>
+        <div class="napkin-ink" aria-hidden="true"></div>
+      </div>
     </div>
-    <div class="napkin-tape" aria-hidden="true"></div>
   </section>
 
   <!-- Problema -->
@@ -1185,30 +1200,30 @@ document.querySelectorAll('.with-sparkle').forEach(btn => {
     const sp = document.createElement('span');
     sp.className = 'sparkle-burst' + (mode === 'hover' ? ' hover' : ' ambient');
     sp.textContent = '✦';
-    const size = (mode === 'ambient' ? 8 : 14) + Math.random() * 5;
+    const size = (mode === 'ambient' ? 8 : 13) + Math.random() * 6;
     sp.style.cssText = `
       position:absolute; pointer-events:none;
       font-size:${Math.min(size, 20)}px;
-      top:${10 + Math.random() * 60}%;
-      left:${5 + Math.random() * 70}%;
+      top:${2 + Math.random() * 70}%;
+      left:${2 + Math.random() * 82}%;
       opacity:1;
       background:transparent !important;
     `;
     btn.appendChild(sp);
     sp.offsetHeight; // force reflow
-    const dur = mode === 'ambient' ? 1.3 : 0.6;
+    const dur = mode === 'ambient' ? 1.8 : 0.55;
     sp.style.animation = `sparkle-pop ${dur}s ease-out forwards`;
     setTimeout(() => { if (sp.parentNode) sp.remove(); }, dur * 1000 + 100);
   }
-  tick = setInterval(() => addSparkle('ambient'), 2200);
+  tick = setInterval(() => addSparkle('ambient'), 1000);
   btn.addEventListener('mouseenter', () => {
     clearInterval(tick);
-    for (let i = 0; i < 5; i++) setTimeout(() => addSparkle('hover'), i * 70);
-    tick = setInterval(() => addSparkle('hover'), 150);
+    for (let i = 0; i < 8; i++) setTimeout(() => addSparkle('hover'), i * 50);
+    tick = setInterval(() => addSparkle('hover'), 80);
   });
   btn.addEventListener('mouseleave', () => {
     clearInterval(tick);
-    setTimeout(() => { tick = setInterval(() => addSparkle('ambient'), 2200); }, 400);
+    setTimeout(() => { tick = setInterval(() => addSparkle('ambient'), 1000); }, 300);
   });
 });
 </script>
