@@ -233,38 +233,132 @@
   .step-content { padding-top: 6px; }
   .step-content h3 { margin-top: 0; }
 
-  /* ── Offer grid ── */
+  /* ── Offer section (wider than main, only here) ── */
+  .offer-section {
+    /* Break out of main's 720px column to give 3 cards breathing room. */
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+    padding: 64px 24px;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .offer-shell {
+    max-width: 1040px;
+    margin: 0 auto;
+  }
+  .offer-intro {
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+    margin: 0 0 28px;
+    max-width: 64ch;
+  }
   .offer-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 20px;
+    align-items: stretch;
   }
-  @media (min-width: 720px) {
+  @media (min-width: 760px) {
     .offer-grid { grid-template-columns: 1fr 1fr; }
   }
-  @media (min-width: 1000px) {
-    .offer-grid { grid-template-columns: 1fr 1fr 1fr; }
+  @media (min-width: 1040px) {
+    .offer-grid { grid-template-columns: repeat(3, 1fr); }
   }
-  .context-bullets {
-    list-style: none;
-    padding: 0;
-    margin: 16px 0 24px;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 10px;
+  .offer-card {
+    background: var(--bg);
+    border: 2px solid var(--line);
+    border-radius: 12px;
+    padding: 28px 26px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
-  @media (min-width: 620px) {
-    .context-bullets { grid-template-columns: 1fr 1fr; }
+  .offer-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(122, 59, 46, 0.1);
   }
-  .context-bullets li {
+  .offer-card.highlight {
+    border-color: var(--accent);
     background: var(--bg-alt);
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
+    box-shadow: 0 6px 28px rgba(122, 59, 46, 0.12);
+  }
+  .offer-card .tier {
+    align-self: flex-start;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.72rem;
+    color: var(--accent);
+    font-weight: 600;
+    background: rgba(122, 59, 46, 0.08);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .offer-card.highlight .tier {
+    background: var(--accent);
+    color: #fff;
+  }
+  .offer-card h3 {
     margin: 0;
-    font-size: 0.97rem;
+    color: var(--accent);
+    font-size: 1.3rem;
+    line-height: 1.25;
+  }
+  .offer-card .offer-positioning {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
     line-height: 1.45;
   }
+  .offer-card .price {
+    font-size: 1.85rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin: 0;
+    line-height: 1;
+  }
+  .offer-card .offer-scope {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .offer-card .offer-scope li {
+    position: relative;
+    padding-left: 22px;
+    margin: 0;
+    font-size: 0.94rem;
+    line-height: 1.4;
+    color: var(--ink);
+  }
+  .offer-card .offer-scope li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 10px;
+    height: 6px;
+    border-left: 2px solid var(--accent-soft);
+    border-bottom: 2px solid var(--accent-soft);
+    transform: rotate(-45deg);
+  }
+  .offer-card .btn {
+    margin-top: auto;
+    align-self: stretch;
+    text-align: center;
+  }
+  .offer-card .guarantee {
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    border-left: 3px solid var(--accent-soft);
+    padding-left: 12px;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  /* ── Stage list (Em que momento você está?) ── */
   .stage-list {
     list-style: none;
     padding: 0;
@@ -295,32 +389,25 @@
     font-size: 0.93rem;
     line-height: 1.45;
   }
-  .offer-card {
-    border: 2px solid var(--line);
-    border-radius: 10px;
-    padding: 24px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  .context-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 24px;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
   }
-  .offer-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(122, 59, 46, 0.1);
+  @media (min-width: 620px) {
+    .context-bullets { grid-template-columns: 1fr 1fr; }
   }
-  .offer-card.highlight {
-    border-color: var(--accent);
+  .context-bullets li {
     background: var(--bg-alt);
-  }
-  .price {
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--accent);
-    margin: 8px 0;
-  }
-  .guarantee {
-    font-size: 0.95rem;
-    color: var(--ink-soft);
-    border-left: 3px solid var(--accent-soft);
-    padding-left: 14px;
-    margin-top: 16px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    margin: 0;
+    font-size: 0.97rem;
+    line-height: 1.45;
   }
 
   ul { padding-left: 20px; }
@@ -547,40 +634,56 @@
     <p>É o que separa um diagnóstico que entrega só uma lista de ferramentas de um que soma quem já sentou com times tratando de cultura e processo. Os exemplos práticos e as perguntas-guia ficam no relatório — pra conversa não estragar a surpresa antes da hora.</p>
   </section>
 
-  <!-- O que entra no diagnóstico -->
-  <section>
-    <h2>O que entra no diagnóstico</h2>
-    <p>Para você saber o tamanho real do que está contratando — e qual profundidade combina com seu caso:</p>
-    <ul class="context-bullets">
-      <li><strong>Diagnóstico Essencial.</strong> Uma pessoa responsável, uma conversa de 45 min, mapeamento da rotina, matriz de esforço × impacto, plano de 4 dias, estimativa de horas que isso libera e bônus de experimentos seguros para falhar.</li>
-      <li><strong>Diagnóstico de Time.</strong> 2 a 3 entrevistas + sessão conjunta de 60 min com o time, mapa de fluxos coletivos, critérios de risco/privacidade/integração, backlog priorizado de experimentos, plano de adoção em 30/60/90 e revisão com a liderança.</li>
-      <li><strong>Conversa gratuita.</strong> 20 min, sem custo, pra entender se faz sentido seguir e qual das duas profundidades combina com você.</li>
-    </ul>
-  </section>
-
-  <!-- Oferta -->
-  <section id="provar">
-    <h2>O que deseja provar?</h2>
-    <div class="offer-grid">
-      <div class="offer-card">
-        <h3>Conversa gratuita</h3>
-        <p>20 minutos, sem custo. Eu ouço sua rotina e indico 1 ou 2 jeitos simples de começar com IA ou automação — uma direção prática, não um relatório detalhado.</p>
-        <div class="price">R$ 0</div>
-        <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
-      </div>
-      <div class="offer-card highlight">
-        <h3>Diagnóstico Sommelier (Essencial)</h3>
-        <p>Conversa guiada de 45 min + relatório completo (com bônus de experimentos seguros para falhar em cultura e processos) + conversa de revisão do relatório.</p>
-        <div class="price">R$ 897</div>
-        <a href="#" class="btn btn-primary">Quero meu Diagnóstico Essencial</a>
-        <div class="guarantee">🛡️ Garantia: se o relatório não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</div>
-      </div>
-      <div class="offer-card">
-        <h3>Diagnóstico de Time</h3>
-        <p>Para times e lideranças. 2–3 entrevistas + sessão conjunta de 60 min + relatório priorizado com critérios de risco, integração e privacidade + plano de adoção em 30/60/90 + revisão.</p>
-        <div class="price">A combinar</div>
-        <a href="#" class="btn btn-secondary">Quero conversar sobre o de Time</a>
-        <div class="guarantee">Piloto sob convite: combinado caso a caso, com a mesma garantia de devolução.</div>
+  <!-- Oferta (unificada: do mais simples ao mais elaborado) -->
+  <section id="provar" class="offer-section">
+    <div class="offer-shell">
+      <h2>Por onde começar</h2>
+      <p class="offer-intro">Cada card mostra o que entra, qual o investimento e quando faz sentido seguir. Comece pelo que cabe no seu momento — se fizer sentido aprofundar, a próxima camada já está descrita.</p>
+      <div class="offer-grid">
+        <article class="offer-card">
+          <span class="tier">Conversa exploratória</span>
+          <h3>Conversa gratuita</h3>
+          <p class="offer-positioning">Pra decidir se vale seguir, sem pagar nem assinar nada.</p>
+          <div class="price">R$ 0</div>
+          <ul class="offer-scope">
+            <li>20 min, sem custo</li>
+            <li>Eu ouço sua rotina</li>
+            <li>1–2 jeitos simples de começar</li>
+            <li>Sem relatório detalhado</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
+        </article>
+        <article class="offer-card highlight">
+          <span class="tier">Mais pedido</span>
+          <h3>Diagnóstico Essencial</h3>
+          <p class="offer-positioning">Pra uma pessoa ou operação delimitada que quer sair do achismo.</p>
+          <div class="price">R$ 897</div>
+          <ul class="offer-scope">
+            <li>1 conversa guiada de 45 min</li>
+            <li>Mapa da rotina + matriz esforço × impacto</li>
+            <li>Plano de 4 dias + estimativa de horas/semana</li>
+            <li>Bônus de experimentos seguros para falhar</li>
+            <li>1 conversa de revisão</li>
+          </ul>
+          <a href="#" class="btn btn-primary">Quero meu Diagnóstico Essencial</a>
+          <p class="guarantee">🛡️ Garantia: se o relatório não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
+        </article>
+        <article class="offer-card">
+          <span class="tier">Para times</span>
+          <h3>Diagnóstico de Time</h3>
+          <p class="offer-positioning">Pra times e lideranças que precisam priorizar e ganhar aderência coletiva.</p>
+          <div class="price">A combinar</div>
+          <ul class="offer-scope">
+            <li>2–3 entrevistas + sessão conjunta de 60 min</li>
+            <li>Mapa de fluxos coletivos</li>
+            <li>Critérios de risco, privacidade e integração</li>
+            <li>Backlog priorizado de experimentos</li>
+            <li>Plano de adoção em 30/60/90</li>
+            <li>Revisão com a liderança</li>
+          </ul>
+          <a href="#" class="btn btn-secondary">Quero conversar sobre o de Time</a>
+          <p class="guarantee">Piloto sob convite, com a mesma garantia de devolução integral.</p>
+        </article>
       </div>
     </div>
   </section>
