@@ -902,39 +902,7 @@
     filter: blur(0.5px);
   }
 
-  /* ── CTA hover swap for offer cards (across cards in the grid) ── */
-  .offer-grid:has(.btn:hover) .btn {
-    background: transparent !important;
-    color: var(--accent) !important;
-    border-color: var(--accent) !important;
-    box-shadow: none !important;
-    transform: none !important;
-    --sparkle-color: var(--gold) !important;
-  }
-  .offer-grid .btn:hover {
-    background: var(--accent) !important;
-    color: #fff !important;
-    border-color: var(--accent) !important;
-    transform: translateY(-2px) !important;
-    box-shadow: 0 6px 20px rgba(122, 59, 46, 0.15) !important;
-    --sparkle-color: var(--bg) !important;
-  }
-  /* highlight card: when in swapped state, bordaux text on transparent bg */
-  .offer-card.highlight .btn-primary {
-    background: var(--bordeaux);
-    border-color: var(--bordeaux);
-  }
-  .offer-grid:has(.btn:hover) .offer-card.highlight .btn-primary {
-    background: transparent !important;
-    color: var(--bordeaux) !important;
-    border-color: var(--bordeaux) !important;
-    --sparkle-color: var(--gold) !important;
-  }
-  .offer-grid .offer-card.highlight .btn-primary:hover {
-    background: var(--bordeaux) !important;
-    color: #fff !important;
-    --sparkle-color: var(--bg) !important;
-  }
+  /* offer card buttons stay as defined — no hover swap between cards */
 
   /* ── Sparkle ── */
   .sparkle-burst {
