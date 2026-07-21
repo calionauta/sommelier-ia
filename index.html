@@ -15,6 +15,7 @@
     --ink-soft: #5c5347;
     --accent: #7a3b2e;
     --accent-soft: #c98a63;
+    --gold: #d4a76a;
     --line: #ded4c4;
     --glow-1: rgba(201, 138, 99, 0.08);
     --glow-2: rgba(201, 138, 99, 0.04);
@@ -327,22 +328,19 @@
   }
   .offer-card .offer-scope li {
     position: relative;
-    padding-left: 22px;
+    padding-left: 18px;
     margin: 0;
     font-size: 0.94rem;
     line-height: 1.4;
     color: var(--ink);
   }
   .offer-card .offer-scope li::before {
-    content: '';
+    content: '◆';
     position: absolute;
     left: 0;
-    top: 8px;
-    width: 10px;
-    height: 6px;
-    border-left: 2px solid var(--accent-soft);
-    border-bottom: 2px solid var(--accent-soft);
-    transform: rotate(-45deg);
+    top: 0;
+    color: var(--accent-soft);
+    font-size: 0.6rem;
   }
   .offer-card .btn {
     margin-top: auto;
@@ -357,6 +355,37 @@
     margin: 0;
     line-height: 1.4;
   }
+  .offer-card .guarantee .icon { color: var(--gold); }
+
+  /* nota do sommelier */
+  .sommelier-note {
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent-soft);
+    margin-bottom: 10px;
+    border-left: 2px solid var(--gold);
+    padding-left: 12px;
+    line-height: 1.45;
+  }
+
+  /* preço estilo carta de vinhos */
+  .price .currency {
+    font-size: 0.65em;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-weight: 400;
+  }
+
+  /* linha decorativa */
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--accent-soft);
+    margin: 20px 0;
+  }
+  .divider-line { flex: 1; height: 1px; background: var(--line); }
+  .divider-diamond { font-size: 0.6rem; }
 
   /* ── Stage list (Em que momento você está?) ── */
   .stage-list {
@@ -526,7 +555,11 @@
 
   <!-- Hero -->
   <section class="hero">
-    <div class="eyebrow">Sommelier de IA</div>
+    <div class="eyebrow" style="display:flex;gap:10px;align-items:center;justify-content:center;">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;"><path d="M6.5 2h11l-1.8 14.4A3 3 0 0 1 12.7 19h-1.4a3 3 0 0 1-3-2.6L6.5 2z"/><path d="M9 19v3h6v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      IA + Curadoria
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="opacity:0.5;"><path d="M6.5 2h11l-1.8 14.4A3 3 0 0 1 12.7 19h-1.4a3 3 0 0 1-3-2.6L6.5 2z"/><path d="M9 19v3h6v-3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </div>
 
     <div class="hero-intro">
       <div class="avatar-wrapper">
@@ -637,14 +670,17 @@
   <!-- Oferta (unificada: do mais simples ao mais elaborado) -->
   <section id="provar" class="offer-section">
     <div class="offer-shell">
-      <h2>Por onde começar</h2>
+      <div class="divider"><span class="divider-line"></span><span class="divider-diamond">✦</span><span class="divider-line"></span></div>
+      <h2 style="text-align:center;">Por onde começar</h2>
       <p class="offer-intro">Cada card mostra o que entra, qual o investimento e quando faz sentido seguir. Comece pelo que cabe no seu momento — se fizer sentido aprofundar, a próxima camada já está descrita.</p>
       <div class="offer-grid">
         <article class="offer-card">
-          <span class="tier">Conversa exploratória</span>
+          <span class="tier">✦ grátis</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
           <h3>Conversa gratuita</h3>
-          <p class="offer-positioning">Pra decidir se vale seguir, sem pagar nem assinar nada.</p>
-          <div class="price">R$ 0</div>
+          <p class="sommelier-note" style="margin-bottom:0;">Para descobrir seu perfil antes de escolher a harmonização.</p>
+          </div>
+          <div class="price"><span class="currency">R$</span> 0</div>
           <ul class="offer-scope">
             <li>20 min, sem custo</li>
             <li>Eu ouço sua rotina</li>
@@ -654,10 +690,12 @@
           <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
         </article>
         <article class="offer-card highlight">
-          <span class="tier">Mais pedido</span>
+          <span class="tier">✦ mais pedido</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
           <h3>Harmonização Essencial</h3>
-          <p class="offer-positioning">Pra uma pessoa ou operação delimitada que quer sair do achismo.</p>
-          <div class="price">R$ 897</div>
+          <p class="sommelier-note" style="margin-bottom:0;">Para quem quer começar a provar com segurança.</p>
+          </div>
+          <div class="price"><span class="currency">R$</span> 897</div>
           <ul class="offer-scope">
             <li>1 conversa guiada de 45 min</li>
             <li>Mapa da rotina + matriz esforço × impacto</li>
@@ -666,12 +704,14 @@
             <li>1 conversa de revisão</li>
           </ul>
           <a href="#" class="btn btn-primary">Quero minha Harmonização</a>
-          <p class="guarantee">🛡️ Garantia: se a carta não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
+          <p class="guarantee"><span class="icon">✦</span> Garantia: se a carta não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
         </article>
         <article class="offer-card">
-          <span class="tier">Para times</span>
+          <span class="tier">✦ para times</span>
+          <div style="display:flex;flex-direction:column;gap:6px;">
           <h3>Harmonização de Time</h3>
-          <p class="offer-positioning">Pra times e lideranças que precisam priorizar e ganhar aderência coletiva.</p>
+          <p class="sommelier-note" style="margin-bottom:0;">Para times que precisam de uma adega compartilhada.</p>
+          </div>
           <div class="price">A combinar</div>
           <ul class="offer-scope">
             <li>2–3 entrevistas + sessão conjunta de 60 min</li>
@@ -681,8 +721,8 @@
             <li>Plano de adoção em 30/60/90</li>
             <li>Revisão com a liderança</li>
           </ul>
-          <a href="#" class="btn btn-secondary">Quero conversar sobre o de Time</a>
-          <p class="guarantee">Piloto sob convite, com a mesma garantia de devolução integral.</p>
+          <a href="#" class="btn btn-secondary">Quero conversar sobre a de Time</a>
+          <p class="guarantee"><span class="icon">✦</span> Piloto sob convite, com a mesma garantia de devolução integral.</p>
         </article>
       </div>
     </div>
