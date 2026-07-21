@@ -57,35 +57,23 @@
   section:last-of-type { padding-bottom: 32px; }
   /* decorative divider between sections — organic lines + diamond */
   section::after {
-    content: '';
+    content: '✦';
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 0;
     padding-top: 64px;
     pointer-events: none;
-    background: 
-      /* left organic line (hand-drawn squiggle) */
-      linear-gradient(to right, transparent calc(50% - 52px), var(--accent-soft) calc(50% - 52px), transparent calc(50% - 48px)),
-      /* right organic line */
-      linear-gradient(to left, transparent calc(50% - 52px), var(--accent-soft) calc(50% - 52px), transparent calc(50% - 48px)),
-      /* center diamond */
-      radial-gradient(circle at center, var(--accent-soft) 0.7px, transparent 0.7px);
-    background-size:
-      60% 2px,
-      60% 2px,
-      auto;
-    background-repeat: no-repeat, no-repeat, no-repeat;
-    background-position:
-      center center,
-      center center,
-      center center;
-    opacity: 0.3;
+    font-size: 0.75rem;
+    color: var(--gold);
     min-height: 10px;
-  }
-  /* Apply hand-drawn wobble to the lines via border-like trick */
-  section::after {
+    opacity: 0.3;
     filter: url(#napkin-wobble);
+    background:
+      linear-gradient(to right, transparent calc(50% - 30px), var(--accent) calc(50% - 30px), transparent calc(50% - 24px)),
+      linear-gradient(to left, transparent calc(50% - 30px), var(--accent) calc(50% - 30px), transparent calc(50% - 24px));
+    background-size: 100% 2px, 100% 2px;
+    background-repeat: no-repeat, no-repeat;
+    background-position: center center, center center;
   }
   section:last-of-type::after,
   section.offer-section::after { display: none; }
@@ -713,7 +701,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin: 28px 0 10px;
+    margin: 48px 0 10px;
   }
 
   /* ── Napkin Note (cartoon napkin com texto manuscrito) ── */
@@ -978,7 +966,7 @@
     <div class="napkin-wrap">
       <div class="napkin-tape" aria-hidden="true"></div>
       <div class="napkin-note">
-        <p>Cada ferramenta de IA promete transformar seu trabalho — mas nenhuma veio com manual de instruções pro seu contexto específico. Desde 2022 eu testo, classifico e pareio ferramentas com problemas reais de gente como você. Algumas chamam isso de curadoria. Pra mim, é só o que um bom sommelier faz: provar pra saber o que recomendar.</p>
+        <p>Cada ferramenta de IA promete transformar seu trabalho, mas nenhuma veio com manual de instruções pro seu contexto específico. Desde 2022 eu testo, classifico e pareio ferramentas com problemas reais de gente como você. Algumas chamam isso de curadoria. Pra mim, é só o que um bom sommelier faz: provar pra saber o que recomendar.</p>
       <div class="napkin-stain" aria-hidden="true"></div>
       <div class="napkin-ink" aria-hidden="true"></div>
       <div class="napkin-splash" aria-hidden="true"></div>
@@ -1143,11 +1131,11 @@
     <h2>O que já publiquei</h2>
     <p>O método por trás do diagnóstico também aparece em: dois e-books gratuitos, stelow (25+ skills open source) e trabalho documentado no LinkedIn.</p>
     <ul>
-      <li><a class="inline-link" href="#">stelow</a> — mais de 25 skills de workflow com IA, código aberto, com estrelas e forks reais no GitHub.</li>
+      <li>Trabalho em produto, cultura organizacional e facilitação documentado no <a class="inline-link" href="https://www.linkedin.com/in/calionauta">LinkedIn</a> e em <a class="inline-link" href="https://calionauta.com/">calionauta.com</a>.</li>
+      <li><a class="inline-link" href="#">stelow</a> — mais de 25 skills de workflow com IA, código aberto no GitHub.</li>
       <li>Outros projetos open source ligados a desenvolvimento de sistemas com IA, no <a class="inline-link" href="#">GitHub</a>.</li>
       <li>Uma coleção de prompts usados no dia a dia e em consultorias, catalogada <a class="inline-link" href="#">aqui</a>.</li>
       <li>Dois e-books gratuitos sobre <a class="inline-link" href="https://espacocalionauta.substack.com/p/roteiro-pratico-para-validar-ideias">descoberta de produto</a> e <a class="inline-link" href="https://espacocalionauta.substack.com/p/e-book-jobs-to-be-done-em-portugues">Jobs to be Done</a>, no <a class="inline-link" href="https://espacocalionauta.substack.com/">Substack</a>.</li>
-      <li>Trabalho em produto, cultura organizacional e facilitação documentado no <a class="inline-link" href="https://www.linkedin.com/in/calionauta">LinkedIn</a> e em <a class="inline-link" href="https://calionauta.com/">calionauta.com</a>.</li>
     </ul>
   </section>
 
