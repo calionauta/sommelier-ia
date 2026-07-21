@@ -275,16 +275,42 @@
     display: flex;
     flex-direction: column;
     gap: 14px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    position: relative;
+  }
+  /* decorative top line — like a menu card header */
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: 20%;
+    right: 20%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity 0.25s ease, left 0.25s ease, right 0.25s ease;
   }
   .offer-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 24px rgba(122, 59, 46, 0.1);
+    transform: perspective(600px) rotateX(-1.5deg) rotateY(1.5deg) translateY(-4px);
+    box-shadow:
+      0 12px 32px rgba(122, 59, 46, 0.1),
+      0 4px 12px rgba(122, 59, 46, 0.06);
+  }
+  .offer-card:hover::before {
+    opacity: 1;
+    left: 10%;
+    right: 10%;
   }
   .offer-card.highlight {
     border-color: var(--bordeaux);
     background: var(--bg-alt);
     box-shadow: 0 6px 28px rgba(107, 39, 55, 0.12);
+  }
+  .offer-card.highlight:hover {
+    box-shadow:
+      0 12px 32px rgba(107, 39, 55, 0.15),
+      0 4px 12px rgba(107, 39, 55, 0.08);
   }
   .offer-card .tier {
     align-self: flex-start;
