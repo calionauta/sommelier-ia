@@ -672,12 +672,12 @@
   /* ── Button shimmer sweep ── */
   .btn {
     position: relative;
-    overflow: hidden;
   }
   .btn::after {
     content: '';
     position: absolute;
     inset: 0;
+    border-radius: inherit;
     background: linear-gradient(105deg,
       transparent 0%, transparent 30%,
       rgba(255,255,255,0.15) 45%, rgba(255,255,255,0.2) 50%,
@@ -692,26 +692,21 @@
     20% { background-position: -100% 0; }
   }
 
-  /* ── Button sparkle dots ── */
-  .btn-sp {
+  /* ── Sparkle burst ── */
+  .sparkle-burst {
     position: absolute;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
     pointer-events: none;
+    font-family: "DM Serif Display", Georgia, serif;
     opacity: 0;
+    z-index: 2;
   }
-  .btn-primary .btn-sp { background: #ffe9c0; box-shadow: 0 0 6px 2px rgba(255,233,192,0.4); }
-  .btn-secondary .btn-sp { background: var(--gold); box-shadow: 0 0 6px 2px rgba(212,167,106,0.5); }
-  .btn-sp:nth-child(1) { top: -5px; left: 12%; animation: btn-pop 4s ease-in-out infinite 0s; }
-  .btn-sp:nth-child(2) { bottom: -5px; right: 20%; animation: btn-pop 4s ease-in-out infinite 1s; }
-  .btn-sp:nth-child(3) { top: -5px; right: 35%; animation: btn-pop 4s ease-in-out infinite 2s; }
-  .btn-sp:nth-child(4) { bottom: -5px; left: 30%; animation: btn-pop 4s ease-in-out infinite 3s; }
-  @keyframes btn-pop {
-    0%, 100% { opacity: 0; transform: scale(0) translate(0,0); }
-    15% { opacity: 1; transform: scale(1.3) translate(-1px,-2px); }
-    28% { opacity: 0.6; transform: scale(0.8) translate(-3px,-5px); }
-    40% { opacity: 0; transform: scale(0.2) translate(-5px,-10px); }
+  .btn-primary .sparkle-burst { color: #ffe9c0; text-shadow: 0 0 6px rgba(255,233,192,0.6); }
+  .btn-secondary .sparkle-burst { color: var(--gold); text-shadow: 0 0 6px rgba(212,167,106,0.6); }
+  @keyframes sparkle-pop {
+    0%   { opacity: 0; transform: scale(0) rotate(0deg) translateY(0); }
+    25%  { opacity: 1; transform: scale(1.3) rotate(40deg) translateY(-2px); }
+    60%  { opacity: 0.7; transform: scale(0.8) rotate(-10deg) translateY(-6px); }
+    100% { opacity: 0; transform: scale(0.2) rotate(30deg) translateY(-14px); }
   }
 </style>
 </head>
@@ -742,7 +737,7 @@
         <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
         <div class="cta-row">
           <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-          <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
+          <a href="#provar" class="btn btn-secondary with-sparkle">Quero Curadoria Sommelier</a>
         </div>
       </div>
     </div>
@@ -880,7 +875,7 @@
           </ul>
           <p class="guarantee"><span class="icon">✦</span> Garantia: se a ficha de degustação não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
           <div class="offer-card-actions">
-          <a href="#" class="btn btn-primary">Contratar<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
+          <a href="#" class="btn btn-primary with-sparkle">Contratar</a>
           </div>
         </article>
         <article class="offer-card">
@@ -937,7 +932,7 @@
     <p>Se você já viu ferramentas mas não sabe qual aplicar no seu contexto, a mesma conversa serve — a diferença é que a gente parte do que você conhece e ajusta pra sua realidade.</p>
     <div class="cta-row">
       <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-      <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier<span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span><span class="btn-sp"></span></a>
+      <a href="#provar" class="btn btn-secondary with-sparkle">Quero Curadoria Sommelier</a>
     </div>
   </section>
 
@@ -949,7 +944,7 @@
 </main>
 
 <script>
-// 3D tilt on offer cards — follows mouse position
+// 3D tilt on offer cards
 document.querySelectorAll('.offer-card').forEach(card => {
   card.addEventListener('mousemove', e => {
     const rect = card.getBoundingClientRect();
@@ -967,7 +962,34 @@ document.querySelectorAll('.offer-card').forEach(card => {
     card.style.transition = 'transform 0.4s ease, box-shadow 0.25s ease';
   });
 });
-</script>
+
+// Sparkle burst on buttons
+document.querySelectorAll('.with-sparkle').forEach(btn => {
+  let timer;
+  btn.addEventListener('mouseenter', () => {
+    let count = 0;
+    timer = setInterval(() => {
+      if (count++ > 5) return;
+      const sp = document.createElement('span');
+      sp.className = 'sparkle-burst';
+      sp.textContent = '✦';
+      const side = Math.floor(Math.random() * 4);
+      const pos = Math.random() * 80 + 10;
+      const size = Math.random() * 10 + 8;
+      sp.style.fontSize = size + 'px';
+      if (side === 0) { sp.style.top = '-10px'; sp.style.left = pos + '%'; }
+      else if (side === 1) { sp.style.right = '-10px'; sp.style.top = pos + '%'; }
+      else if (side === 2) { sp.style.bottom = '-10px'; sp.style.left = pos + '%'; }
+      else { sp.style.left = '-10px'; sp.style.top = pos + '%'; }
+      sp.style.animation = `sparkle-pop ${Math.random() * 0.3 + 0.6}s ease-out forwards`;
+      btn.appendChild(sp);
+      setTimeout(() => sp.remove(), 1500);
+    }, 250);
+  });
+  btn.addEventListener('mouseleave', () => {
+    clearInterval(timer);
+  });
+});
 
 </body>
 </html>
