@@ -721,10 +721,11 @@
     position: relative;
     width: 100%;
     background: #f7f2ea;
-    font-family: 'Patrick Hand', 'Caveat', cursive;
+    font-family: "DM Serif Display", Georgia, serif;
     color: #1b4c8a;
     font-size: 22px;
-    line-height: 1.55;
+    line-height: 1.5;
+    font-weight: 400;
     padding: 30px 34px;
     margin: 0;
     transform: rotate(-0.6deg);
@@ -760,14 +761,20 @@
     height: 28px;
     margin: 0 auto -14px;
     transform: rotate(1.5deg);
-    background: rgba(240, 230, 200, 0.6);
-    border-radius: 2px;
+    background: rgba(215, 195, 150, 0.7);
     box-shadow:
-      0 1px 3px rgba(0,0,0,0.06),
-      inset 0 1px 0 rgba(255,255,255,0.4);
+      0 1px 4px rgba(0,0,0,0.10),
+      inset 0 1px 0 rgba(255,255,255,0.5),
+      0 2px 2px -1px rgba(0,0,0,0.05);
     pointer-events: none;
     z-index: 3;
     filter: url(#napkin-wobble);
+    /* Jagged torn edges via mask */
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 28'%3E%3Cpath d='M2,0 L6,1 L10,0 L14,2 L18,0 L22,1 L26,0 L30,2 L34,0 L38,1 L42,0 L46,2 L50,0 L54,1 L58,0 L62,2 L64,1 L64,6 L62,10 L64,14 L62,18 L64,22 L62,26 L64,28 L60,27 L56,28 L52,26 L48,28 L44,27 L40,28 L36,26 L32,28 L28,27 L24,28 L20,26 L16,28 L12,27 L8,28 L4,26 L0,27 L0,22 L2,18 L0,14 L2,10 L0,6 L2,2 Z' fill='black'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 28'%3E%3Cpath d='M2,0 L6,1 L10,0 L14,2 L18,0 L22,1 L26,0 L30,2 L34,0 L38,1 L42,0 L46,2 L50,0 L54,1 L58,0 L62,2 L64,1 L64,6 L62,10 L64,14 L62,18 L64,22 L62,26 L64,28 L60,27 L56,28 L52,26 L48,28 L44,27 L40,28 L36,26 L32,28 L28,27 L24,28 L20,26 L16,28 L12,27 L8,28 L4,26 L0,27 L0,22 L2,18 L0,14 L2,10 L0,6 L2,2 Z' fill='black'/%3E%3C/svg%3E");
+    -webkit-mask-size: 100% 100%;
+    mask-size: 100% 100%;
+    border-radius: 0;
   }
   /* Tape fold/crease line */
   .napkin-tape::after {
@@ -777,7 +784,7 @@
     right: 20%;
     top: 50%;
     height: 1px;
-    background: rgba(0,0,0,0.04);
+    background: rgba(0,0,0,0.06);
     transform: rotate(-2deg);
   }
 
@@ -859,6 +866,41 @@
     pointer-events: none;
     transform: rotate(-12deg);
     z-index: 0;
+  }
+
+  /* Wine splash drop — bordeaux stain */
+  .napkin-splash {
+    position: absolute;
+    top: 55%;
+    left: 8%;
+    width: 32px;
+    height: 38px;
+    pointer-events: none;
+    z-index: 0;
+    transform: rotate(-18deg);
+    filter: blur(0.8px) contrast(1.2);
+  }
+  .napkin-splash::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 24px;
+    border-radius: 50% 0 50% 50%;
+    background: radial-gradient(ellipse at 40% 30%, rgba(107,39,55,0.08) 0%, rgba(107,39,55,0.04) 60%, transparent 80%);
+  }
+  .napkin-splash::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 60%;
+    width: 6px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(107, 39, 55, 0.05);
+    filter: blur(0.5px);
   }
 
   /* ── CTA hover swap for offer cards (across cards in the grid) ── */
@@ -971,8 +1013,9 @@
       <div class="napkin-note">
         <p>Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
         <p>Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
-        <div class="napkin-stain" aria-hidden="true"></div>
-        <div class="napkin-ink" aria-hidden="true"></div>
+      <div class="napkin-stain" aria-hidden="true"></div>
+      <div class="napkin-ink" aria-hidden="true"></div>
+      <div class="napkin-splash" aria-hidden="true"></div>
       </div>
     </div>
   </section>
