@@ -834,7 +834,6 @@
   }
   .napkin-note p {
     margin-bottom: 10px;
-    font-weight: 600;
   }
 
   /* Coffee ring stain — beneath text */
@@ -868,38 +867,38 @@
     z-index: 0;
   }
 
-  /* Wine splash drop — bordeaux stain */
+  /* Wine splash drop — bordeaux stain (visible) */
   .napkin-splash {
     position: absolute;
-    top: 55%;
-    left: 8%;
-    width: 32px;
-    height: 38px;
+    top: 50%;
+    left: 10%;
+    width: 40px;
+    height: 46px;
     pointer-events: none;
     z-index: 0;
-    transform: rotate(-18deg);
-    filter: blur(0.8px) contrast(1.2);
+    transform: rotate(-22deg);
+    filter: blur(0.6px) contrast(1.5);
   }
   .napkin-splash::before {
     content: '';
     position: absolute;
-    top: 50%;
+    top: 55%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 20px;
-    height: 24px;
-    border-radius: 50% 0 50% 50%;
-    background: radial-gradient(ellipse at 40% 30%, rgba(107,39,55,0.08) 0%, rgba(107,39,55,0.04) 60%, transparent 80%);
+    width: 28px;
+    height: 32px;
+    border-radius: 50% 10% 50% 50%;
+    background: radial-gradient(ellipse at 35% 25%, rgba(107,39,55,0.35) 0%, rgba(107,39,55,0.18) 50%, transparent 75%);
   }
   .napkin-splash::after {
     content: '';
     position: absolute;
-    top: 20%;
-    left: 60%;
-    width: 6px;
-    height: 8px;
+    top: 12%;
+    left: 55%;
+    width: 8px;
+    height: 10px;
     border-radius: 50%;
-    background: rgba(107, 39, 55, 0.05);
+    background: rgba(107, 39, 55, 0.2);
     filter: blur(0.5px);
   }
 
@@ -1258,15 +1257,12 @@ document.querySelectorAll('.with-sparkle').forEach(btn => {
     sp.style.animation = `sparkle-pop ${dur}s ease-out forwards`;
     setTimeout(() => { if (sp.parentNode) sp.remove(); }, dur * 1000 + 100);
   }
-  tick = setInterval(() => addSparkle('ambient'), 1000);
   btn.addEventListener('mouseenter', () => {
-    clearInterval(tick);
     for (let i = 0; i < 8; i++) setTimeout(() => addSparkle('hover'), i * 50);
     tick = setInterval(() => addSparkle('hover'), 80);
   });
   btn.addEventListener('mouseleave', () => {
     clearInterval(tick);
-    setTimeout(() => { tick = setInterval(() => addSparkle('ambient'), 1000); }, 300);
   });
 });
 </script>
