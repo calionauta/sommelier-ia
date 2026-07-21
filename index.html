@@ -59,9 +59,9 @@
   /* ── h1 com shimmer sutil (vivo + futurístico) ── */
   h1 {
     font-family: "DM Serif Display", Georgia, serif;
-    font-size: 1.65rem;
-    line-height: 1.3;
-    margin: 0 0 8px;
+    font-size: 2rem;
+    line-height: 1.25;
+    margin: 0 0 12px;
     font-weight: 400;
     background: linear-gradient(
       135deg,
@@ -120,8 +120,9 @@
   }
 
   .hero-sub {
-    font-size: 1rem;
-    color: var(--ink-soft);
+    font-size: 1.08rem;
+    color: var(--ink);
+    font-weight: 500;
     margin: 0 0 20px;
     line-height: 1.5;
   }
@@ -130,7 +131,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    margin-top: 28px;
+    margin-top: 24px;
   }
   .btn {
     display: inline-block;
@@ -171,20 +172,20 @@
   .hero-intro {
     display: flex;
     align-items: flex-start;
-    gap: 20px;
-    margin-bottom: 20px;
+    gap: 24px;
+    margin-bottom: 32px;
   }
 
   .avatar-wrapper {
     flex-shrink: 0;
     position: relative;
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
   }
 
   .avatar {
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
@@ -355,6 +356,7 @@
     line-height: 1;
   }
   .offer-card .offer-scope {
+    flex: 1;
     list-style: none;
     padding: 0;
     margin: 0;
@@ -606,20 +608,20 @@
   }
   .taca-wrapper .sparkle {
     position: absolute;
-    width: 3px;
-    height: 3px;
+    width: 4px;
+    height: 4px;
     border-radius: 50%;
     background: var(--gold);
     opacity: 0;
-    animation: sparkle-drift 4s ease-in-out infinite;
+    animation: sparkle-drift 3s ease-in-out infinite;
   }
-  .taca-wrapper .sparkle:nth-child(2) { top: -4px; left: -2px; animation-delay: 0s; }
-  .taca-wrapper .sparkle:nth-child(3) { top: 6px; left: -6px; animation-delay: 1.3s; }
-  .taca-wrapper .sparkle:nth-child(4) { top: -2px; left: 10px; animation-delay: 2.6s; }
+  .taca-wrapper .sparkle:nth-child(2) { top: -2px; left: 2px; animation-delay: 0s; }
+  .taca-wrapper .sparkle:nth-child(3) { top: 8px; left: -4px; animation-delay: 1s; }
+  .taca-wrapper .sparkle:nth-child(4) { top: 10px; left: 10px; animation-delay: 2s; }
   @keyframes sparkle-drift {
     0%, 100% { opacity: 0; transform: scale(0) translate(0, 0); }
-    25%      { opacity: 0.8; transform: scale(1) translate(-2px, -2px); }
-    50%      { opacity: 0; transform: scale(0) translate(-4px, -4px); }
+    30%      { opacity: 1; transform: scale(1.2) translate(-2px, -3px); }
+    60%      { opacity: 0; transform: scale(0.3) translate(-4px, -6px); }
   }
 
   /* ── Step metadata badge ── */
@@ -657,20 +659,20 @@
 
     <div class="hero-intro">
       <div class="avatar-wrapper">
-        <img src="profile.jpg" alt="Cali" class="avatar" width="72" height="72">
+        <img src="profile.jpg" alt="Cali" class="avatar" width="96" height="96">
       </div>
       <div>
         <h1>Seu trabalho não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
         <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
+        <div class="cta-row">
+          <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+          <a href="#provar" class="btn btn-secondary">Quero Harmonização Sommelier</a>
+        </div>
       </div>
     </div>
 
-        <p class="lede">Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
-        <p class="lede">Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
-    <div class="cta-row">
-      <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-      <a href="#provar" class="btn btn-secondary">Quero Harmonização Sommelier</a>
-    </div>
+    <p class="lede">Sou o Cali, seu sommelier de IA. Acompanho de perto quase tudo que aparece de novo em IA e aprendi a reconhecer os padrões: que família de ferramenta resolve que tipo de problema, o que vale a pena experimentar no seu contexto e o que é só barulho de feed.</p>
+    <p class="lede">Com frequência alguém me conta um problema do trabalho e, naturalmente, acabo apontando um caminho ou ferramenta onde IA ou automação se encaixam. A reação mais comum é surpresa: "não sabia que dava pra fazer isso". Depois de perceber essa reação algumas vezes, transformei num serviço.</p>
   </section>
 
   <!-- Problema -->
@@ -734,9 +736,9 @@
     <div class="step">
       <div class="step-num">2</div>
       <div class="step-content">
-        <h3>Análise e recomendação</h3>
-        <p>Cruzo o que você descreveu com o que percebo como possibilidade, cruzando com um catálogo vivo de ferramentas. Cada recomendação responde a uma tarefa que você citou.</p>
-        <span class="step-meta">curadoria · 230+ ferramentas catalogadas</span>
+        <h3>Análise e curadoria</h3>
+        <p>Cruzo o que você descreveu com o que reconheço como padrão: que família de ferramenta se encaixa naquele tipo de tarefa. Cada recomendação responde a um problema que você citou, priorizando o que você já tem ou o que é mais simples de começar.</p>
+        <span class="step-meta">curadoria · sob medida</span>
       </div>
     </div>
     <div class="step">
@@ -785,7 +787,7 @@
             <li>Sem carta de harmonização detalhada</li>
           </ul>
           <div class="offer-card-actions">
-          <a href="#" class="btn btn-secondary">Quero minha conversa gratuita</a>
+          <a href="#" class="btn btn-secondary">Agendar</a>
           </div>
         </article>
         <article class="offer-card highlight">
@@ -803,7 +805,7 @@
             <li>1 conversa de revisão</li>
           </ul>
           <div class="offer-card-actions">
-          <a href="#" class="btn btn-primary">Quero minha Harmonização</a>
+          <a href="#" class="btn btn-primary">Contratar</a>
           <p class="guarantee"><span class="icon">✦</span> Garantia: se a carta de harmonização não trouxer oportunidades reais de recuperar tempo, devolvo 100% do valor.</p>
           </div>
         </article>
@@ -823,7 +825,7 @@
             <li>Revisão com a liderança</li>
           </ul>
           <div class="offer-card-actions">
-          <a href="#" class="btn btn-secondary">Quero conversar sobre a de Time</a>
+          <a href="#" class="btn btn-secondary">Consultar</a>
           <p class="guarantee"><span class="icon">✦</span> Piloto sob convite, com a mesma garantia de devolução integral.</p>
           </div>
         </article>
