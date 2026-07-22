@@ -55,25 +55,17 @@
   main { max-width: 720px; margin: 0 auto; padding: 0 24px; position: relative; }
   section { padding: 64px 0; }
   section:last-of-type { padding-bottom: 32px; }
-  /* decorative divider between sections — organic lines + diamond */
+  /* decorative divider between sections — organic lines left + right */
   section::after {
-    content: '✦';
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-top: 64px;
+    content: '';
+    display: block;
+    height: 12px;
+    margin-top: 64px;
     pointer-events: none;
-    font-size: 0.75rem;
-    color: var(--gold);
-    min-height: 10px;
-    opacity: 0.3;
-    filter: url(#napkin-wobble);
+    opacity: 0.45;
     background:
-      linear-gradient(to right, transparent calc(50% - 30px), var(--accent) calc(50% - 30px), transparent calc(50% - 24px)),
-      linear-gradient(to left, transparent calc(50% - 30px), var(--accent) calc(50% - 30px), transparent calc(50% - 24px));
-    background-size: 100% 2px, 100% 2px;
-    background-repeat: no-repeat, no-repeat;
-    background-position: center center, center center;
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M2,8 C20,3 40,12 60,7 C80,2 100,11 118,6' stroke='%23c98a63' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") left center / 96px 12px no-repeat,
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 12'%3E%3Cpath d='M2,8 C20,3 40,12 60,7 C80,2 100,11 118,6' stroke='%23c98a63' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E") right center / 96px 12px no-repeat;
   }
   section:last-of-type::after,
   section.offer-section::after { display: none; }
@@ -265,8 +257,6 @@
     margin-left: calc(50% - 50vw);
     margin-right: calc(50% - 50vw);
     padding: 64px 24px;
-    border-top: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
   }
   .offer-shell {
     max-width: 1040px;
@@ -957,8 +947,8 @@
         <h1>Seu trabalho não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
         <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
         <div class="cta-row">
-          <a href="https://cal.com/calionauta/degustia-sutil-20min" class="btn btn-primary" data-cal-link="calionauta/degustia-sutil-20min" data-cal-namespace="degustia-sutil-20min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Quero uma conversa gratuita de 20 min</a>
-          <a href="https://app.cal.com/calionauta/degustia-estruturado-45min" class="btn btn-secondary with-sparkle" data-cal-link="calionauta/degustia-estruturado-45min" data-cal-namespace="degustia-estruturado-45min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Quero Curadoria Sommelier</a>
+          <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+          <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier</a>
         </div>
       </div>
     </div>
@@ -1159,8 +1149,8 @@
     <p>Não tem problema. A maioria das pessoas — dona de negócio, consultor ou líder de time — nunca parou pra mapear o que dá pra automatizar. A gente começa pela sua rotina: você me conta como é seu trabalho, e eu mapeio onde dá pra ganhar tempo.</p>
     <p>Se você já viu ferramentas mas não sabe qual aplicar no seu contexto, a mesma conversa serve — a diferença é que a gente parte do que você conhece e ajusta pra sua realidade.</p>
     <div class="cta-row">
-      <a href="https://cal.com/calionauta/degustia-sutil-20min" class="btn btn-primary" data-cal-link="calionauta/degustia-sutil-20min" data-cal-namespace="degustia-sutil-20min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Quero uma conversa gratuita de 20 min</a>
-      <a href="https://app.cal.com/calionauta/degustia-estruturado-45min" class="btn btn-secondary with-sparkle" data-cal-link="calionauta/degustia-estruturado-45min" data-cal-namespace="degustia-estruturado-45min" data-cal-config='{"layout":"month_view","useSlotsViewOnSmallScreen":"true"}'>Quero Curadoria Sommelier</a>
+      <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
+      <a href="#provar" class="btn btn-secondary">Quero Curadoria Sommelier</a>
     </div>
   </section>
 
