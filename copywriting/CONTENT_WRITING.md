@@ -40,10 +40,10 @@ A DegustIA existe porque o problema do mercado de IA não é falta de ferramenta
 
 #### Estratégia / Motivação
 
-- **"O anti-curso de IA"** — a DegustIA resolve o problema que cursos genéricos criam: teoria sem contexto. Não tem módulo 1,2,3. Tem uma conversa, um diagnóstico e recomendações práticas.
+- **"O anti-curso de IA"** — a DegustIA resolve o problema que cursos genéricos criam: teoria sem contexto. Não tem módulo 1,2,3. Tem uma conversa, uma leitura de contexto e recomendações práticas.
 - **Do produto ao sommelier** — a trajetória de anos em produto (descoberta, hipótese, validação, falha rápida) aplicada ao universo de IA. O método é o mesmo: entender o problema antes da solução.
 - **O problema do "já tentei, não virou rotina"** — testar ferramentas é fácil. Incorporar no dia a dia é onde a maioria trava. A degustação ataca esse gap.
-- **Dar o diagnóstico em 20 min (grátis)** — o Sutil existe como porta de entrada de baixo risco. Uma aposta contra a assimetria de informação: o cliente não sabe onde a IA pode ajudar, e a DegustIA mostra em 20 min sem custo.
+- **Dar um norte em 20 min (grátis)** — o Sutil existe como porta de entrada de baixo risco. Uma aposta contra a assimetria de informação: o cliente não sabe onde a IA pode ajudar, e a DegustIA mostra em 20 min sem custo.
 
 #### Filosofia de design
 
