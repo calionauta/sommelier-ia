@@ -708,11 +708,12 @@
     padding: 30px 34px;
     margin: 0;
     transform: rotate(-0.6deg);
+    transform-origin: center 20%;
     box-shadow:
       0 2px 8px rgba(0,0,0,0.04),
       0 8px 28px rgba(0,0,0,0.04),
       inset 0 1px 0 rgba(255,255,255,0.7);
-    transition: transform 0.3s ease;
+    animation: napkin-sway 5s ease-in-out infinite;
     /* keep the napkin clean - tape is a sibling outside */
     clip-path: polygon(
       0.5% 0.8%, 3.2% 0.3%, 8.5% 0.9%, 15.8% 0.2%, 25.3% 0.7%,
@@ -730,7 +731,7 @@
     );
   }
   .napkin-note:hover {
-    transform: rotate(-0.3deg) scale(1.01);
+    animation-play-state: paused;
   }
 
   /* Sticky tape - adesivo segurando o napkin na parede (metade no papel, metade no fundo) */
@@ -740,6 +741,7 @@
     height: 28px;
     margin: 0 auto -14px;
     transform: rotate(1.5deg);
+    animation: tape-sway 5s ease-in-out infinite;
     background: rgba(215, 195, 150, 0.7);
     box-shadow:
       0 1px 4px rgba(0,0,0,0.10),
@@ -748,6 +750,7 @@
     pointer-events: none;
     z-index: 3;
     filter: url(#napkin-wobble);
+    transform-origin: top center;
     /* Jagged torn edges via mask */
     -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 28'%3E%3Cpath d='M2,0 L6,1 L10,0 L14,2 L18,0 L22,1 L26,0 L30,2 L34,0 L38,1 L42,0 L46,2 L50,0 L54,1 L58,0 L62,2 L64,1 L64,6 L62,10 L64,14 L62,18 L64,22 L62,26 L64,28 L60,27 L56,28 L52,26 L48,28 L44,27 L40,28 L36,26 L32,28 L28,27 L24,28 L20,26 L16,28 L12,27 L8,28 L4,26 L0,27 L0,22 L2,18 L0,14 L2,10 L0,6 L2,2 Z' fill='black'/%3E%3C/svg%3E");
     mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 28'%3E%3Cpath d='M2,0 L6,1 L10,0 L14,2 L18,0 L22,1 L26,0 L30,2 L34,0 L38,1 L42,0 L46,2 L50,0 L54,1 L58,0 L62,2 L64,1 L64,6 L62,10 L64,14 L62,18 L64,22 L62,26 L64,28 L60,27 L56,28 L52,26 L48,28 L44,27 L40,28 L36,26 L32,28 L28,27 L24,28 L20,26 L16,28 L12,27 L8,28 L4,26 L0,27 L0,22 L2,18 L0,14 L2,10 L0,6 L2,2 Z' fill='black'/%3E%3C/svg%3E");
@@ -807,6 +810,20 @@
   .napkin-note > * {
     position: relative;
     z-index: 1;
+  }
+
+  /* Avatar dentro do napkin (float no primeiro parágrafo) */
+  .napkin-avatar {
+    float: left;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 2px 20px 6px 0;
+    border: 3px solid var(--bg-alt);
+    box-shadow:
+      0 0 0 2px var(--accent-soft),
+      0 4px 12px rgba(122, 59, 46, 0.15);
   }
   .napkin-note p:last-child {
     margin-bottom: 0;
@@ -909,6 +926,16 @@
     50%  { opacity: 0.8; transform: scale(0.8) rotate(-6deg) translateY(-6px); }
     100% { opacity: 0; transform: scale(0.3) rotate(15deg) translateY(-12px); }
   }
+  /* ── Napkin gentle sway (organic paper movement) ── */
+  @keyframes napkin-sway {
+    0%, 100% { transform: rotate(-0.6deg); }
+    50%      { transform: rotate(-1.2deg); }
+  }
+  @keyframes tape-sway {
+    0%, 100% { transform: rotate(1.5deg); }
+    50%      { transform: rotate(2.2deg); }
+  }
+
 </style>
 
 </head>
@@ -941,15 +968,12 @@
     <div class="eyebrow" style="display:flex;gap:10px;align-items:center;justify-content:center;">DegustIA ⸱ Sommelier de IA</div>
 
     <div class="hero-intro">
-      <div class="avatar-wrapper">
-        <img src="profile.jpg" alt="Cali" class="avatar" width="96" height="96">
-      </div>
       <div>
         <h1>Seu trabalho não precisa de mais uma ferramenta de IA<span class="hero-pulse" aria-hidden="true"></span></h1>
         <p class="hero-sub">Precisa saber onde a IA cabe, qual opção faz sentido no seu contexto e como testar sem criar mais complexidade.</p>
         <div class="cta-row">
-          <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-          <a href="#provar" class="btn btn-secondary">Quero o Encorpado</a>
+          <a href="#provar" class="btn btn-primary">Conversa gratuita</a>
+          <a href="#provar" class="btn btn-secondary">Saber mais</a>
         </div>
       </div>
     </div>
@@ -957,7 +981,7 @@
     <div class="napkin-wrap">
       <div class="napkin-tape" aria-hidden="true"></div>
       <div class="napkin-note">
-        <p>Cada ferramenta de IA promete transformar seu trabalho, mas nenhuma veio com manual de instruções pro seu contexto específico.</p>
+        <p><img src="profile.jpg" alt="Cali" class="napkin-avatar">Cada ferramenta de IA promete transformar seu trabalho, mas nenhuma veio com manual de instruções pro seu contexto específico.</p>
         <p>Desde 2022 venho colocando ferramentas de IA à prova em situações reais de trabalho. Testo, comparo, descarto o que não funciona e procuro entender onde cada solução realmente faz diferença.</p>
         <p>Gosto de pensar nesse trabalho como o de um sommelier. Alguém que experimenta muitas opções para recomendar apenas aquelas mais adequadas para cada contexto.</p>
       <div class="napkin-stain" aria-hidden="true"></div>
@@ -1076,7 +1100,7 @@
   <section id="provar" class="offer-section">
     <div class="offer-shell">
       <h2 style="text-align:center;">Por onde começar</h2>
-      <p class="offer-intro">Cada card mostra o que entra, qual o investimento e quando faz sentido seguir. Comece pelo que cabe no seu momento: se fizer sentido aprofundar, a próxima camada já está descrita.</p>
+      <p class="offer-intro">Cada opção mostra o que entra, qual o investimento e quando faz sentido seguir. Comece pelo que cabe no seu momento: se fizer sentido aprofundar, a próxima camada já está descrita.</p>
       <div class="offer-grid">
         <article class="offer-card">
           <span class="tier">✦ grátis</span>
@@ -1136,7 +1160,6 @@
       </div>
 
       <div style="margin-top:48px;padding-top:40px;border-top:2px solid var(--line);">
-        <h2>Complexo</h2>
         <div class="offer-grid" style="grid-template-columns:1fr;">
           <article class="offer-card" style="max-width:500px;margin:0 auto;">
             <span class="tier">✦ projeto</span>
@@ -1194,7 +1217,6 @@
   <!-- Prova social -->
   <section>
     <h2>Perfil e Projetos</h2>
-    <p>O método por trás da degustação também aparece em projetos públicos, e-books e no LinkedIn.</p>
     <ul>
       <li>Trajetória completa em produto, tecnologia e IA documentada no <a class="inline-link" href="https://www.linkedin.com/in/calionauta">LinkedIn</a> e em <a class="inline-link" href="https://calionauta.com/">calionauta.com</a>.</li>
       <li><a class="inline-link" href="#">stelow</a>: mais de 25 skills de workflow com IA, código aberto no GitHub.</li>
@@ -1210,8 +1232,8 @@
     <p>Não tem problema. A maioria das pessoas, dona de negócio, consultor ou líder de time, nunca parou pra mapear o que dá pra automatizar. A gente começa pela sua rotina: você me conta como é seu trabalho, e eu mapeio onde dá pra ganhar tempo.</p>
     <p>Se você já viu ferramentas mas não sabe qual aplicar no seu contexto, a mesma conversa serve: a diferença é que a gente parte do que você conhece e ajusta pra sua realidade.</p>
     <div class="cta-row">
-      <a href="#provar" class="btn btn-primary">Quero uma conversa gratuita de 20 min</a>
-      <a href="#provar" class="btn btn-secondary">Quero o Encorpado</a>
+      <a href="#provar" class="btn btn-primary">Conversa gratuita</a>
+      <a href="#provar" class="btn btn-secondary">Saber mais</a>
     </div>
   </section>
 
